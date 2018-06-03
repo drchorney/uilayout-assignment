@@ -1,0 +1,21 @@
+<div class="images-things-page">
+  <sd-areas tabs="false" sd-areas-side>
+    
+    <div class="row">
+
+      <div class="areas-left"
+          ng-class="sideVM.isRightHidden() ?'col-xs-12':'col-xs-12 col-sm-6 col-md-5 col-lg-4'">
+        <sd-area position="left">
+            <sd-list-images></sd-list-images>
+        </sd-area>
+      </div>
+
+      <div class="areas-right col-xs-12 col-sm-6 col-md-7 col-lg-8"
+        ng-hide="sideVM.isRightHidden()">
+        <sd-area position="right">
+            <sd-list-things></sd-list-things>
+        </sd-area>
+      </div> 
+    </div>
+  </sd-areas>
+</div>

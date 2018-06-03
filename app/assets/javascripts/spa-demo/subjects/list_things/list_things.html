@@ -1,0 +1,16 @@
+
+ <sd-tabs>
+  <!-- <sd-tab ng-repeat="ti in $ctrl.things" label="$index"> -->
+    <div ng-repeat="ti in $ctrl.things">
+      <sd-tab label="Thing {{$index+1}}">
+        <div class="name" style="font-size: 1.2em; font-weight: bold;">{{ti.thing_name}}</div> 
+        <img ng-src="{{ti.image_content_url}}?width=400"/>
+
+        <div style="font-weight:bold">Description:</div>
+        <div>
+          {{ti.description}}
+        </div>
+      </sd-tab>
+    </div>
+  <!-- </sd-tab> -->
+ </sd-tabs>

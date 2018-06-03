@@ -7,6 +7,9 @@
       templateUrl: areasTemplateUrl,
       controller: AreasController,
       transclude: true,
+      bindings: {
+        tabs: "@"
+      }
       //bindings: {},
     })
     .component("sdArea", {
@@ -50,12 +53,25 @@
     vm.areas=[];
     vm.areasLeft = [];
     vm.areasRight = [];
+    vm.show_tabs = true;
 
     vm.$onInit = function() {
       //console.log("AreasController",$scope);
     }
     return;
     //////////////
+
+    function showTabs() {
+      var result = vm.show && vm.areasController.countActive(vm.position)===1;
+      //console.log("isExpanded", vm.position, result);
+
+      if (vm.tabs === "false") {
+        vm.show_tabs = false;
+      } else {
+        vm.show_tabs = true;
+      }
+    }
+
   }
   AreasController.prototype.addArea = function(area) {
     this.areas.push(area);
@@ -90,6 +106,7 @@
     var vm=this;
     vm.show=true;
     vm.isExpanded = isExpanded;
+    vm.useTabs = useTabs;
 
     vm.$onInit = function() {
       //console.log("AreaController",$scope);
@@ -102,13 +119,22 @@
       //console.log("isExpanded", vm.position, result);
       return result;
     }
+
+    function useTabs() {
+      if (vm.areasController.tabs=="false"){
+        return false
+      } else {
+        return true
+      }
+    }
   }
 
 
-  AreasSideController.$inject = [];
-  function AreasSideController() { 
+  AreasSideController.$inject = ["spa-demo.subjects.listImagesThings"];
+  function AreasSideController(ListImagesThings) { 
     var vm = this;
     vm.isHidden = isHidden;
+    vm.isRightHidden = isRightHidden;
 
     vm.$onInit = function() {
       //console.log("AreasSideController", vm);      
@@ -119,6 +145,14 @@
       var result=vm.areas.countActive(position)===0;  
       //console.log("isHidden", position, result);
       return result;
+    }
+
+    function isRightHidden() {
+      if (ListImagesThings.getThings().length==0) {
+        return true
+      } else {
+        return false
+      }
     }
   }
 

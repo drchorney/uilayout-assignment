@@ -30,8 +30,8 @@
     return APP_CONFIG.tab_html;
   }    
 
-  TabsController.$inject = ["$scope"];
-  function TabsController($scope) {
+  TabsController.$inject = ["$state","$scope","spa-demo.subjects.listImagesThings"];
+  function TabsController($state,$scope,ListImagesThings) {
     var vm=this;
     vm.tabs=[];
     vm.selectTab = selectTab;
@@ -39,6 +39,17 @@
     vm.$onInit = function() {
       //console.log("TabsController",$scope);
     }
+    vm.$postLink = function() {
+      $scope.$watch(
+        function() { return ListImagesThings.getThings(); }, 
+        function(things) { 
+          console.log($state.current.name);
+          if ($state.current.name == "image_things_view") {
+            vm.tabs = []; 
+          }
+        });
+    } 
+
     return;
     //////////////
     function selectTab(tab) {

@@ -1,5 +1,5 @@
 <div class="areas-pane">
-  <ul class="area tab-label nav nav-pills" role="tablist">
+  <ul class="area tab-label nav nav-pills" role="tablist" ng-if="$ctrl.show_tabs">
     <li ng-repeat="area in $ctrl.areas"
         ng-hide="area.show">
       <a role="tab"
